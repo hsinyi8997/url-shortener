@@ -2,4 +2,16 @@
 <img src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png"
   style="width: 10%;">
 <h5>Success! Please use this link:</h5>
-<a href="{{ newURL }}">{{ newURL }}</a>
+<a href="/{{shortCode}}">Go</a>
+<input type="text" name="link" id="link" value="{{ newURL }}" disabled>
+<button onclick="copyFunction()">copy</button>
+
+<script>
+  function copyFunction () {
+    const copyLink = document.querySelector('#link')
+    copyLink.select();
+    copyLink.setSelectionRange(0, 99999)
+    navigator.clipboard.writeText(copyLink.value)
+    alert("Copied the text: " + copyLink.value)
+  }
+</script>

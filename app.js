@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-Parser')
 const generateRandomIndex = require('./generateRandomIndex')
 const urlList = require('./models/url')
-const mainURL = 'http://localhost/'
+const mainURL = 'http://localhost:3000/'
 const app = express()
 const port = 3000
 
@@ -34,7 +34,7 @@ app.post('/', (req, res) => {
     .then(urls => {
       addedURL = urls.find(url => url.originalURL === inputURL)
       if (addedURL) {
-        res.render('result', { newURL: addedURL.shortURL})
+        res.render('result', { newURL: addedURL.shortURL, shortCode: addedURL.shortCode})
       } else {
         let shortCode = generateRandomIndex()
         while (urls.some(url => url.shortCode === shortCode)) {
@@ -45,9 +45,17 @@ app.post('/', (req, res) => {
           shortURL: mainURL + shortCode,
           shortCode
         })
-        res.render('result', { newURL: mainURL + shortCode})
+        res.render('result', { newURL: mainURL + shortCode, shortCode})
       }
     })
+    .catch(error => console.log(error))
+})
+
+app.get('/:code', (req, res) => {
+  const code = req.params.code
+  urlList.findOne({ shortCode: code})
+    .lean()
+    .then(urlData => res.redirect(urlData.originalURL))
     .catch(error => console.log(error))
 })
 
