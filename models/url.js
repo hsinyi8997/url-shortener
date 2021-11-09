@@ -9,6 +9,10 @@ const urlSchema = new Schema({
   shortURL: {
     type: String,
     require: true
+  },
+  shortCode: {
+    type: String,
+    require: true
   }
 })
 
