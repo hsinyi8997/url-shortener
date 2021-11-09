@@ -12,7 +12,7 @@ db.on('error', () => {
 db.once('open', () => {
   datas.forEach(data => {
     const shortCode = generateRandomIndex()
-    Url.create({
+    Url.create = ({
       originalURL: data,
       shortURL: `http://localhost/${shortCode}`,
       shortCode
