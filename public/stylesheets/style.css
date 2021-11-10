@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.card-border {
+  border: 3px solid #f3eba7;
+  background-color:	#f3eba7;
+  margin-top: 8em;
+  margin-bottom: 3em;
+  width: max-content;
+  height: max-content;
+  box-shadow: 5px 5px 20px;
+}
+
+img {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  width: 30%;
+}
+
+#originalURL {
+  width: 80%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
+
+#shortenBtn {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  width: 55%;
+}

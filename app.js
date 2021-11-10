@@ -22,6 +22,7 @@ db.once('open', () => {
 app.engine('hbs', exphbs({ defaultLayout:'main', extname:'.hbs' }))
 app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
   res.render('index')
@@ -55,7 +56,11 @@ app.get('/:code', (req, res) => {
   const code = req.params.code
   urlList.findOne({ shortCode: code})
     .lean()
-    .then(urlData => res.redirect(urlData.originalURL))
+    .then(urlData => {
+      if (urlData) {
+        res.redirect(urlData.originalURL)
+      }
+    })
     .catch(error => console.log(error))
 })
 
