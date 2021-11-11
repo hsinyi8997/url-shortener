@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-Parser')
 require('./config/mongoose')
 const app = express()
-const port = 3000
+const port = process.env.port || 3000
 const routes = require('./routes')
 
 app.engine('hbs', exphbs({ defaultLayout:'main', extname:'.hbs' }))
