@@ -61,7 +61,8 @@ app.get('/:code', (req, res) => {
   urlList.findOne({ shortCode: code})
     .lean()
     .then(urlData => {
-      res.status(301).res.redirect(urlData.originalURL)
+      console.log(urlData)
+      res.status(301).redirect(urlData.originalURL)
     })
     .catch(() => { res.sendStatus(404) })
 })
