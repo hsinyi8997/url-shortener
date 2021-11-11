@@ -29,27 +29,31 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  const inputURL = req.body.originalURL
-  urlList.find()
-    .lean()
-    .then(urls => {
-      addedURL = urls.find(url => url.originalURL === inputURL)
-      if (addedURL) {
-        res.render('result', { newURL: addedURL.shortURL, shortCode: addedURL.shortCode})
-      } else {
-        let shortCode = generateRandomIndex()
-        while (urls.some(url => url.shortCode === shortCode)) {
-          shortCode = generateRandomIndex()
+  const inputURL = req.body.originalURL.trim()
+  if (inputURL) {
+    urlList.find()
+      .lean()
+      .then(urls => {
+        addedURL = urls.find(url => url.originalURL === inputURL)
+        if (addedURL) {
+          res.render('result', { newURL: addedURL.shortURL, shortCode: addedURL.shortCode })
+        } else {
+          let shortCode = generateRandomIndex()
+          while (urls.some(url => url.shortCode === shortCode)) {
+            shortCode = generateRandomIndex()
+          }
+          urlList.create({
+            originalURL: inputURL,
+            shortURL: mainURL + shortCode,
+            shortCode
+          })
+          res.render('result', { newURL: mainURL + shortCode, shortCode })
         }
-        urlList.create({
-          originalURL: inputURL,
-          shortURL: mainURL + shortCode,
-          shortCode
-        })
-        res.render('result', { newURL: mainURL + shortCode, shortCode})
-      }
-    })
-    .catch(error => console.log(error))
+      })
+      .catch(error => console.log(error))
+  } else {
+    res.redirect('/')
+  }
 })
 
 app.get('/:code', (req, res) => {
@@ -57,11 +61,9 @@ app.get('/:code', (req, res) => {
   urlList.findOne({ shortCode: code})
     .lean()
     .then(urlData => {
-      if (urlData) {
-        res.redirect(urlData.originalURL)
-      }
+      res.status(301).res.redirect(urlData.originalURL)
     })
-    .catch(error => console.log(error))
+    .catch(() => { res.sendStatus(404) })
 })
 
 app.listen(port, () => {
