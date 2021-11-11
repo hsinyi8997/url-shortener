@@ -1,10 +1,17 @@
-<h1>URL shortener</h1>
-<img src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png"
-  style="width: 10%;">
-<h5>Success! Please use this link:</h5>
-<a href="/{{shortCode}}">Go</a>
-<input type="text" name="link" id="link" value="{{ newURL }}" disabled>
-<button onclick="copyFunction()">copy</button>
+<div class="container">
+  <div class="card-border mx-auto text-center">
+    <h2 class="mt-5">URL shortener</h2>
+    <img class="mt-4" src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png">
+    <h5 class="mt-4">Success! Please use this link:</h5>
+    <a href="/{{shortCode}}">
+      <input class="text-primary" type="text" name="link" id="link" value="{{ newURL }}" disabled>
+    </a>
+    <div class="mb-3 mt-3">
+      <a href="/" class="btn btn-info mr-3">back</a>
+      <button type="submit" class="btn btn-primary" onclick="copyFunction()" id="copyBtn">copy</button>
+    </div>
+  </div>
+</div>
 
 <script>
   function copyFunction () {

@@ -38,3 +38,22 @@ img {
   margin-top: 15px;
   width: 55%;
 }
+
+#copyBtn {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#link {
+  width: 60%;
+  border: 3px solid #f3eba7;
+  background-color: #f3eba7;
+  cursor: pointer;
+  font-weight: 700;
+  margin-left: 40px;
+  margin-top: 0;
+}
+
+h5 {
+  margin-bottom: 0;
+}
