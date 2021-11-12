@@ -2,13 +2,13 @@ const express = require('express')
 const router = express.Router()
 const urlList = require('../../models/url')
 const generateRandomIndex = require('../../generateRandomIndex')
-const mainURL = 'http://localhost:3000/'
 
 router.get('/', (req, res) => {
   res.render('index')
 })
 
 router.post('/', (req, res) => {
+  const host = req.headers.host
   const inputURL = req.body.originalURL.trim()
   if (inputURL) {
     urlList.find()
@@ -24,10 +24,10 @@ router.post('/', (req, res) => {
           }
           urlList.create({
             originalURL: inputURL,
-            shortURL: mainURL + shortCode,
+            shortURL: host + '/' + shortCode,
             shortCode
           })
-          res.render('result', { newURL: mainURL + shortCode, shortCode })
+          res.render('result', { newURL: host + '/' + shortCode, shortCode })
         }
       })
       .catch(error => console.log(error))
