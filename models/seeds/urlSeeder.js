@@ -1,7 +1,7 @@
 const db = require('../../config/mongoose')
 const urlList = require('../url')
 const datas = require('../../test-url.json')
-const port = 3000
+const PORT = 3000
 const generateRandomIndex = require('../../generateRandomIndex')
 
 db.once('open', () => {
@@ -9,7 +9,7 @@ db.once('open', () => {
     const shortCode = generateRandomIndex()
     urlList.create({
       originalURL: data,
-      shortURL: `http:localhost:${port}/${shortCode}`,
+      shortURL: `http:localhost:${PORT}/${shortCode}`,
       shortCode
     })
   })
