@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
     urlList.find()
       .lean()
       .then(urls => {
-        addedURL = urls.find(url => url.originalURL === inputURL)
+        const addedURL = urls.find(url => url.originalURL === inputURL)
         if (addedURL) {
           res.render('result', { newURL: addedURL.shortURL, shortCode: addedURL.shortCode })
         } else {
